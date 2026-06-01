@@ -2,14 +2,14 @@ public abstract class Persona {
     private String nombre;
     private int fecNacimiento;
 
-    Persona(String nombre, int fecNacimiento) {
+    public Persona(String nombre, int fecNacimiento) {
         this.nombre = nombre;
         this.fecNacimiento = fecNacimiento;
     }
 
-    String getNombre() { return nombre; }
-    void setNombre(String nombre) { this.nombre = nombre; }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    int getFecNacimiento() { return fecNacimiento; }
-    void setFecNacimiento(int fecNacimiento) { this.fecNacimiento = fecNacimiento; }
+    public int getFecNacimiento() { return fecNacimiento; }
+    public void setFecNacimiento(int fecNacimiento) { this.fecNacimiento = fecNacimiento; }
 }

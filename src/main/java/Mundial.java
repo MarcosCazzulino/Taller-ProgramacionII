@@ -10,7 +10,7 @@ public class Mundial {
     private List<Sede> sedes;
     private List<Grupo> grupos;
 
-    Mundial(Sede sede, int anio, String mascota, int fechaDesde, int fechaHasta) {
+    public Mundial(Sede sede, int anio, String mascota, int fechaDesde, int fechaHasta) {
         this.sede = sede;
         this.anio = anio;
         this.mascota = mascota;
@@ -20,18 +20,18 @@ public class Mundial {
         this.grupos = new ArrayList<Grupo>();
     }
 
-    int getAnio() { return anio; }
-    void setAnio(int anio) { this.anio = anio; }
+    public int getAnio() { return anio; }
+    public void setAnio(int anio) { this.anio = anio; }
 
-    Sede getSede() { return sede; }
-    void setSede(Sede sede) { this.sede = sede; }
+    public Sede getSede() { return sede; }
+    public void setSede(Sede sede) { this.sede = sede; }
 
-    String getMascota() { return mascota; }
-    void setMascota(String mascota) { this.mascota = mascota; }
+    public String getMascota() { return mascota; }
+    public void setMascota(String mascota) { this.mascota = mascota; }
 
-    int getFechaDesde() { return fechaDesde; }
-    void setFechaDesde(int fechaDesde) { this.fechaDesde = fechaDesde; }
+    public int getFechaDesde() { return fechaDesde; }
+    public void setFechaDesde(int fechaDesde) { this.fechaDesde = fechaDesde; }
 
-    int getFechaHasta() { return fechaHasta; }
-    void setFechaHasta(int fechaHasta) { this.fechaHasta = fechaHasta; }
+    public int getFechaHasta() { return fechaHasta; }
+    public void setFechaHasta(int fechaHasta) { this.fechaHasta = fechaHasta; }
 }

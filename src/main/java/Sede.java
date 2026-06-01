@@ -5,7 +5,7 @@ public class Sede {
     private String clima;
     private String zonaHoraria;
 
-    Sede(Pais pais, String ciudad, float alturaNivelMar, String clima, String zonaHoraria) {
+    public Sede(Pais pais, String ciudad, float alturaNivelMar, String clima, String zonaHoraria) {
         this.pais = pais;
         this.ciudad = ciudad;
         this.alturaNivelMar = alturaNivelMar;
@@ -13,15 +13,15 @@ public class Sede {
         this.zonaHoraria = zonaHoraria;
     }
 
-    String getCiudad() { return ciudad; }
-    void setCiudad(String ciudad) { this.ciudad = ciudad; }
+    public String getCiudad() { return ciudad; }
+    public void setCiudad(String ciudad) { this.ciudad = ciudad; }
 
-    float getAlturaNivelMar() { return alturaNivelMar; }
-    void setAlturaNivelMar(float alturaNivelMar) { this.alturaNivelMar = alturaNivelMar; }
+    public float getAlturaNivelMar() { return alturaNivelMar; }
+    public void setAlturaNivelMar(float alturaNivelMar) { this.alturaNivelMar = alturaNivelMar; }
 
-    String getClima() { return clima; }
-    void setClima(String clima) { this.clima = clima; }
+    public String getClima() { return clima; }
+    public void setClima(String clima) { this.clima = clima; }
 
-    String getZonaHoraria() { return zonaHoraria; }
-    void setZonaHoraria(String zonaHoraria) { this.zonaHoraria = zonaHoraria; }
+    public String getZonaHoraria() { return zonaHoraria; }
+    public void setZonaHoraria(String zonaHoraria) { this.zonaHoraria = zonaHoraria; }
 }

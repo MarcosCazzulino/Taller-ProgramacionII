@@ -3,12 +3,6 @@ public class Participacion {
     private Partido partido;
     private Seleccion seleccion;
 
-    public Participacion() {
-        this.esLocal = false;
-        this.partido = null;
-        this.seleccion = null;
-    }
-
     public Participacion(boolean esLocal, Partido partido, Seleccion seleccion) {
         this.esLocal = esLocal;
         this.partido = partido;

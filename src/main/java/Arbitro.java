@@ -1,5 +1,7 @@
 public class Arbitro extends Persona {
     private int aniosExperiencia;
+    // Lista de arbitrajes
+    // País
 
     public Arbitro() {
         super("", 0);
