@@ -13,12 +13,27 @@ public class Arbitraje {
         this.arbitro = arbitro;
     }
 
-    public CategoriaArbitro getRol() { return rol; }
-    public void setRol(CategoriaArbitro rol) { this.rol = rol; }
+    public CategoriaArbitro getRol() {
+        return rol;
+    }
 
-    public Partido getPartido() { return partido; }
-    public void setPartido(Partido partido) { this.partido = partido; }
+    public void setRol(CategoriaArbitro rol) {
+        this.rol = rol;
+    }
 
-    public Arbitro getArbitro() { return arbitro; }
-    public void setArbitro(Arbitro arbitro) { this.arbitro = arbitro; }
+    public Partido getPartido() {
+        return partido;
+    }
+
+    public void setPartido(Partido partido) {
+        this.partido = partido;
+    }
+
+    public Arbitro getArbitro() {
+        return arbitro;
+    }
+
+    public void setArbitro(Arbitro arbitro) {
+        this.arbitro = arbitro;
+    }
 }

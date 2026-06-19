@@ -4,10 +4,6 @@ public class Evento {
     private Partido partido;
     private Jugador jugador;
 
-    public Evento() {
-        this(TipoEvento.GOL, 0, null, null);
-    }
-
     public Evento(TipoEvento tipo, int minuto, Partido partido, Jugador jugador) {
         this.tipo = tipo;
         this.minuto = minuto;
