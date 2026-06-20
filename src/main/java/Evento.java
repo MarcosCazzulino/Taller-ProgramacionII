@@ -4,10 +4,9 @@ public class Evento {
     private Partido partido;
     private Jugador jugador;
 
-    public Evento(TipoEvento tipo, int minuto, Partido partido, Jugador jugador) {
+    public Evento(TipoEvento tipo, int minuto, Jugador jugador) {
         this.tipo = tipo;
         this.minuto = minuto;
-        this.partido = partido;
         this.jugador = jugador;
     }
 

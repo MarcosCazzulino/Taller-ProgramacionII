@@ -1,7 +1,6 @@
 public class Pais {
     private String nombre;
     private String bandera;
-    // Lista de árbitros
 
     public Pais(String nombre, String bandera) {
         this.nombre = nombre;
