@@ -4,6 +4,7 @@ public class Jugador extends Persona {
     private float peso;
     private float altura;
     private Seleccion seleccion;
+    private list<Evento> eventos;
 
     public Jugador(String nombre, int fecNacimiento, int dorsal, Posicion posicion, float peso, float altura, Seleccion seleccion) {
         super(nombre, fecNacimiento);
@@ -12,6 +13,15 @@ public class Jugador extends Persona {
         this.peso = peso;
         this.altura = altura;
         this.seleccion = seleccion;
+        this.eventos = new ArrayList<Evento>();
+    }
+    
+    public void agregarEvento(Evento evento) {
+        if (evento != null) {
+            this.eventos.add(evento);
+            if (evento.getJugador() != null) {
+                evento.setJugador(this);
+        }
     }
 
     public int getDorsal() { return dorsal; }
