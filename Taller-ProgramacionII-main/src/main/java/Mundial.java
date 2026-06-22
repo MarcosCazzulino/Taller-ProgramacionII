@@ -8,7 +8,9 @@ public class Mundial {
     private int fechaHasta;
     private List<Sede> sedes;
 
-    public Mundial(Sede sede, int anio, String mascota, int fechaDesde, int fechaHasta) {
+    public Mundial(){ this(0, "", 0, 0); }
+    
+    public Mundial(int anio, String mascota, int fechaDesde, int fechaHasta) {
         this.anio = anio;
         this.mascota = mascota;
         this.fechaDesde = fechaDesde;
