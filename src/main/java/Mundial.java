@@ -8,7 +8,6 @@ public class Mundial {
     private int fechaDesde;
     private int fechaHasta;
     private List<Sede> sedes;
-    private List<Grupo> grupos;
 
     public Mundial(Sede sede, int anio, String mascota, int fechaDesde, int fechaHasta) {
         this.sede = sede;
@@ -17,7 +16,6 @@ public class Mundial {
         this.fechaDesde = fechaDesde;
         this.fechaHasta = fechaHasta;
         this.sedes = new ArrayList<Sede>();
-        this.grupos = new ArrayList<Grupo>();
     }
 
     public int getAnio() { return anio; }
@@ -34,4 +32,7 @@ public class Mundial {
 
     public int getFechaHasta() { return fechaHasta; }
     public void setFechaHasta(int fechaHasta) { this.fechaHasta = fechaHasta; }
+
+    public List<Sede> getSedes(){ return this.sedes; } 
+    public void setSedes(List<Sede> sedes){ this.sedes= sedes; } 
 }
