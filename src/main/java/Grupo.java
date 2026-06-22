@@ -5,11 +5,13 @@ public class Grupo {
     private String identificacion;
     private String descripcion;
     private List<Seleccion> selecciones;
+    private Fase fase;
 
-    public Grupo(String identificacion, String descripcion) {
+    public Grupo(String identificacion, String descripcion, Fase fase) {
         this.identificacion = identificacion;
         this.descripcion = descripcion;
         this.selecciones = new ArrayList<Seleccion>();
+        this.fase= fase;
     }
 
     public void agregarSeleccion(Seleccion s) {
@@ -31,5 +33,9 @@ public class Grupo {
     public String getDescripcion() { return descripcion; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
+    public void setFase(Fase fase) { this.fase= fase; }
+    public Fase getFase(){ return this.fase; } 
+
+    public void setSelecciones(List<Seleccion> selecciones){ this.selecciones= selecciones; }
     public List<Seleccion> getSelecciones() { return selecciones; }
 }
