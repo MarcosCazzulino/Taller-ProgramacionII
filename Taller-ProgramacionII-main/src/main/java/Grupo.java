@@ -4,14 +4,16 @@ import java.util.List;
 public class Grupo {
     private String identificacion;
     private String descripcion;
+    private Fase fase;
     private List<Seleccion> selecciones;
 
-    public Grupo(String identificacion, String descripcion) {
+    public Grupo(String identificacion, String descripcion, Fase fase) {
         this.identificacion = identificacion;
         this.descripcion = descripcion;
         this.selecciones = new ArrayList<Seleccion>();
+        this.fase=fase;
     }
-
+    
     public void agregarSeleccion(Seleccion s) {
         if (this.selecciones.size() < 4) {
             this.selecciones.add(s);
@@ -32,4 +34,6 @@ public class Grupo {
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
     public List<Seleccion> getSelecciones() { return selecciones; }
+    public void setSelecciones(List<Seleccion> selecciones){ this.selecciones=selecciones; }
+    public void agregarSeleccion(Seleccion seleccion) { this.selecciones.add(seleccion); }
 }
