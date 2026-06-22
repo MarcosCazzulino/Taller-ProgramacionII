@@ -1,7 +1,6 @@
 public class Evento {
     private TipoEvento tipo;
     private int minuto;
-    private Partido partido;
     private Jugador jugador;
 
     public Evento(TipoEvento tipo, int minuto, Jugador jugador) {
@@ -15,9 +14,6 @@ public class Evento {
 
     public int getMinuto() { return minuto; }
     public void setMinuto(int minuto) { this.minuto = minuto; }
-
-    public Partido getPartido() { return partido; }
-    public void setPartido(Partido partido) { this.partido = partido; }
 
     public Jugador getJugador() { return jugador; }
     public void setJugador(Jugador jugador) { this.jugador = jugador; }
