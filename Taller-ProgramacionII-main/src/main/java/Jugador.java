@@ -8,6 +8,8 @@ public class Jugador extends Persona {
     private float altura;
     private List<Evento> eventos;
 
+    public Jugador(){ this("", 0, 0, null, 0, 0); }
+
     public Jugador(String nombre, int fecNacimiento, int dorsal, Posicion posicion, float peso, float altura) {
         super(nombre, fecNacimiento);
         this.dorsal = dorsal;
