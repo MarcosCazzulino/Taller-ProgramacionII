@@ -15,15 +15,16 @@ public class Partido {
     private List<Evento> eventos;
 
     public Partido() {
-        this(null, null, 0, 0, null);
+        this(null, null, 0, 0, null, null);
     }
 
-    public Partido(Date fecha, Time horario, int duracion, int tiempoAdicional, Fase fase) {
+    public Partido(Date fecha, Time horario, int duracion, int tiempoAdicional, Fase fase, Estadio estadio) {
         this.fecha = fecha;
         this.horario = horario;
         this.duracion = duracion;
         this.tiempoAdicional = tiempoAdicional;
         this.fase = fase;
+        this.estadio= estadio;
         this.participaciones = new ArrayList<Participacion>();
         this.arbitrajes = new ArrayList<Arbitraje>();
         this.eventos = new ArrayList<Evento>();
@@ -36,17 +37,7 @@ public class Partido {
             System.out.println("Ya hay dos selecciones en el partido");
         }
     }
-
     public List<Participacion> getParticipaciones() { return participaciones; }
-    public void setParticipaciones(ArrayList<Participacion> participaciones) { this.participaciones = participaciones; }
-    public List<Arbitraje> getArbitrajes() { return arbitrajes; }
-    public void setArbitrajes(List<Arbitraje> arbitrajes) { this.arbitrajes = arbitrajes; }
-    public Fase getFase(){
-        return fase;
-    }
-
-    public Estadio getEstadio() { return estadio; }
-    public void setEstadio(Estadio estadio) { this.estadio = estadio; }
     public void setParticipaciones(List<Participacion> participaciones) {
         if (participaciones.size() <= 2) {
             this.participaciones = participaciones;
@@ -54,19 +45,16 @@ public class Partido {
             System.out.println("En un partido pueden participar máximo 2 selecciones");
         }
     }
+    
+    public List<Arbitraje> getArbitrajes() { return arbitrajes; }
+    public void setArbitrajes(List<Arbitraje> arbitrajes) { this.arbitrajes = arbitrajes; }
+    public void agregarArbitraje(Arbitraje arbitraje) { this.arbitrajes.add(arbitraje); }
 
-    public void agregarArbitraje(Arbitraje arbitraje) {
-        this.arbitrajes.add(arbitraje);
-    }
-
-    public List<Evento> getEventos() {
-        return eventos;
-    }
-
-    public void setEventos(List<Evento> eventos) {
-        this.eventos = eventos;
-    }
-
+    public Estadio getEstadio() { return estadio; }
+    public void setEstadio(Estadio estadio) { this.estadio = estadio; }
+    
+    public List<Evento> getEventos() { return eventos; }
+    public void setEventos(List<Evento> eventos) { this.eventos = eventos; }
     public void agregarEvento(TipoEvento tipo, int minuto, Jugador jugador) {
         boolean estaJugando = false;
 
@@ -94,6 +82,10 @@ public class Partido {
 
     public int getTiempoAdicional() { return this.tiempoAdicional; }
     public void setTiempoAdicional(int tiempoAdicional) { this.tiempoAdicional = tiempoAdicional; }
+
+    public void setFase(Fase fase) { this.fase= fase; }
+    public Fase getFase(){ return this.fase; }
+    
     public void mostrarAlineaciones() {
         System.out.println("------ ALINEACIONES -------");
         for (Participacion p : this.participaciones) {
@@ -101,7 +93,7 @@ public class Partido {
             System.out.println("");
             System.out.println(sele.getNombreFederacion() + ":");
             for (Jugador j : sele.getJugadores()) {
-                System.out.println("- " + j.getNombre());
+                System.out.println(j.getDorsal + "- " + j.getNombre() + "    " + j.getPosicion);
             }
         }
     }
