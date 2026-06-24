@@ -139,11 +139,21 @@ public class Partido {
     }
 
     public void mostrarAlineaciones() {
+        if (this.participaciones.isEmpty()) {
+            System.out.println("No hay selecciones participantes.");
+            return;
+        }
         System.out.println("------ ALINEACIONES -------");
         for (Participacion p : this.participaciones) {
             Seleccion sele = p.getSeleccion();
             System.out.println("");
             System.out.println(sele.getNombreFederacion() + ":");
+
+            if (sele.getJugadores().isEmpty()) {
+                System.out.println("Sin jugadores cargados.");
+                continue;
+            }
+
             for (Jugador j : sele.getJugadores()) {
                 System.out.println(j.getDorsal() + "- " + j.getNombre() + "    " + j.getPosicion());
             }
@@ -151,6 +161,10 @@ public class Partido {
     }
 
     public void mostrarEventos() {
+        if (this.eventos.isEmpty()){
+            System.out.println("El partido no tiene eventos cargados");
+            return;
+        }
         System.out.println("------ EVENTOS -------");
         for (Evento e : this.eventos) {
             System.out.println(e.getMinuto() + "' - " + e.getTipo() + " - " + e.getJugador().getNombre());
@@ -158,6 +172,10 @@ public class Partido {
     }
 
     public void mostrarResultado() {
+        if(this.participaciones.isEmpty()){
+            System.out.println("No hay participaciones cargadas");
+            return;
+        }
         System.out.println(this.participaciones.get(0).getSeleccion().getNombreFederacion() + " " + this.participaciones.get(0).cantidadGoles() + "-" + this.participaciones.get(1).cantidadGoles() + " " + this.participaciones.get(1).getSeleccion().getNombreFederacion());
     }
 

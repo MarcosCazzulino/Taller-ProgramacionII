@@ -71,35 +71,6 @@ public class Seleccion {
 
     public boolean tienePartidosAsignados() { return !this.participaciones.isEmpty(); }
 
-    public int calcularPuntosGrupo() {
-        int puntos = 0;
-
-        for (Participacion p : participaciones) {
-            Partido partido = p.getPartido();
-
-            // Solo cuenta los partidos de fase de grupos
-            if (partido.getFase().getNombre() != NombreFase.GRUPOS) {
-                continue;
-            }
-
-            int golesMiSeleccion = p.cantidadGoles();
-
-            for (Participacion rival : partido.getParticipaciones()) {
-                if (rival.getSeleccion() != this) {
-                    int golesRival = rival.cantidadGoles();
-
-                    if (golesMiSeleccion > golesRival) {
-                        puntos += 3;
-                    } else if (golesMiSeleccion == golesRival) {
-                        puntos += 1;
-                    }
-                    break; // ya encontre al rival
-                }
-            }
-        }
-        return puntos;
-    }
-
     public NombreFase instanciaAlcanzada() {
         NombreFase instancia = NombreFase.GRUPOS;
 
@@ -111,11 +82,15 @@ public class Seleccion {
 
     public void resultadosSeleccion(){
         System.out.println("Selección: "+ this.nombreFederacion);
-        System.out.println("Puntaje: "+ this.calcularPuntosGrupo());
+        System.out.println("Puntaje: "+ this.getGrupo().obtenerPuntos(this));
         System.out.println("Instancia: "+ this.instanciaAlcanzada());
     }
 
     public void informeDiscSelec(){
+        if (this.jugadores.isEmpty()){
+            System.out.println("No hay jugadores en la selección");
+            return;
+        }
         for (Jugador j: this.jugadores){
             int amarillas = 0, rojas= 0;
             for (Evento e: j.getEventos()){
