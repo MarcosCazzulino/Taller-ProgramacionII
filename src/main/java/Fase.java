@@ -15,7 +15,6 @@ public class Fase {
         this.partidos = new ArrayList<Partido>();
         this.grupos= new ArrayList<Grupo>();
     }
-
     public Fase(NombreFase nombre, List<Partido> partidos, List<Grupo> grupos){
         this.nombre= nombre;
         this.partidos= partidos;
@@ -32,4 +31,16 @@ public class Fase {
     public void setGrupos(List<Grupo> grupos){ this.grupos=grupos; }
     public List<Grupo> getGrupos(){ return this.grupos; }
     public void agregarGrupo(Grupo grupo) { this.grupos.add(grupo); }
+
+    //Metodo para en clase gestora hacer una restriccion a la hora de agregar partidos a una fase.
+    public int cantidadMaximaPartidos() {
+        switch (nombre) {
+            case DIECISEISAVOS: return 16;
+            case OCTAVOS: return 8;
+            case CUARTOS: return 4;
+            case SEMIFINAL: return 2;
+            case FINAL: return 1;
+            default: return 0;
+        }
+    }
 }

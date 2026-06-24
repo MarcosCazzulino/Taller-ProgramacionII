@@ -6,14 +6,14 @@ import java.util.Comparator;
 public class Grupo {
     private String identificacion;
     private String descripcion;
-    private Fase fase;
     private List<Seleccion> selecciones;
+    private Fase fase;
 
     public Grupo(String identificacion, String descripcion, Fase fase) {
         this.identificacion = identificacion;
         this.descripcion = descripcion;
+        this.fase = fase;
         this.selecciones = new ArrayList<Seleccion>();
-        this.fase=fase;
     }
 
     public void agregarSeleccion(Seleccion s) {
@@ -68,6 +68,9 @@ public class Grupo {
 
     public List<Seleccion> getSelecciones() { return selecciones; }
     public void setSelecciones(List<Seleccion> selecciones){ this.selecciones=selecciones; }
+
+    public void setFase(Fase fase) { this.fase= fase; }
+    public Fase getFase(){ return this.fase; }
 
     public void mostrarTablaPosiciones() {
         List<Seleccion> tabla = new ArrayList<>(this.selecciones);

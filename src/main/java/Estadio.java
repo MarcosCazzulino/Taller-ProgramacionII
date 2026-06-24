@@ -26,4 +26,7 @@ public class Estadio {
     public List<Partido> getPartidos(){ return this.partidos; }
     public void setPartidos(List<Partido> partidos){ this.partidos= partidos; }
     public void agregarPartido(Partido partido) { this.partidos.add(partido); }
+    public int cantidadPartidos(){
+        return  partidos.size();
+    }
 }

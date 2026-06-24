@@ -20,7 +20,6 @@ public class Sede {
     public void setEstadios(ArrayList<Estadio> estadios) { this.estadios = estadios; }
     public ArrayList<Estadio> getEstadios(){ return this.estadios; }
     public void agregarEstadio(Estadio estadio){ this.estadios.add(estadio); }
-    //public int cantidadPartidos(){ return partidos.size(); }
 
     public String getCiudad() { return ciudad; }
     public void setCiudad(String ciudad) { this.ciudad = ciudad; }
@@ -36,4 +35,21 @@ public class Sede {
 
     public void setPais(Pais pais) { this.pais= pais; }
     public Pais getPais() { return this.pais; }
+
+    //Metodo para saber la capacidad total para de una sede
+    public int capacidadSede(){
+        int totalCapacidad=0;
+        for(Estadio estad: estadios){
+            totalCapacidad+=estad.getCapacidad();
+        }
+        return totalCapacidad;
+    }
+    //Metodo para saber la cantidad de partidos por ciudad;
+    public int cantidadPartidosPorCiudad(){
+        int cantidadPartidos=0;
+        for(Estadio estad: estadios){
+            cantidadPartidos+=estad.cantidadPartidos();
+        }
+        return cantidadPartidos;
+    }
 }

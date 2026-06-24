@@ -1,12 +1,30 @@
 import java.util.*;
 
 public class GestionMundial {
+    private List<Fase> fases;
+    private List<Grupo> grupos;
     private List<Partido> partidos;
     private List<Seleccion> selecciones;
 
     public GestionMundial() {
         this.partidos = new ArrayList<>();
         this.selecciones = new ArrayList<>();
+        this.fases=new ArrayList<>();
+        this.grupos=new ArrayList<>();
+    }
+
+    public List<Fase> getFases(){
+        return fases;
+    }
+
+    public void setFases(List<Fase> fases) {
+        this.fases = fases;
+    }
+
+
+
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
     }
 
     public List<Partido> getPartidos() {
@@ -131,5 +149,23 @@ public class GestionMundial {
 
         s.agregarCuerpoTecnico(ct);
         System.out.println(ct.getNombre() + " (" + ct.getRol() + ") se incorporó al cuerpo técnico de " + s.getNombreFederacion());
+    }
+
+    //Configurar los grupos y fases de eliminacion asi como planificar los partidos
+    public void configurarFasesEliminacion(){
+        fases.add(new Fase(NombreFase.DIECISEISAVOS));
+        fases.add(new Fase(NombreFase.OCTAVOS));
+        fases.add(new Fase(NombreFase.CUARTOS));
+        fases.add(new Fase(NombreFase.SEMIFINAL));
+        fases.add(new Fase(NombreFase.FINAL));
+    }
+
+    public void planificarPartido(Fase fase, Partido partido) {
+        if (fase.getPartidos().size() < fase.cantidadMaximaPartidos()) {
+            fase.agregarPartido(partido);
+            partido.setFase(fase);
+        } else {
+            System.out.println("La fase ya alcanzó el máximo de partidos.");
+        }
     }
 }

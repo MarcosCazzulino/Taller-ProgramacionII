@@ -24,7 +24,7 @@ public class Partido {
         this.duracion = duracion;
         this.tiempoAdicional = tiempoAdicional;
         this.fase = fase;
-        this.estadio= estadio;
+        this.estadio = estadio;
         this.participaciones = new ArrayList<Participacion>();
         this.arbitrajes = new ArrayList<Arbitraje>();
         this.eventos = new ArrayList<Evento>();
@@ -37,7 +37,11 @@ public class Partido {
             System.out.println("Ya hay dos selecciones en el partido");
         }
     }
-    public List<Participacion> getParticipaciones() { return participaciones; }
+
+    public List<Participacion> getParticipaciones() {
+        return participaciones;
+    }
+
     public void setParticipaciones(List<Participacion> participaciones) {
         if (participaciones.size() <= 2) {
             this.participaciones = participaciones;
@@ -46,15 +50,33 @@ public class Partido {
         }
     }
 
-    public List<Arbitraje> getArbitrajes() { return arbitrajes; }
-    public void setArbitrajes(List<Arbitraje> arbitrajes) { this.arbitrajes = arbitrajes; }
-    public void agregarArbitraje(Arbitraje arbitraje) { this.arbitrajes.add(arbitraje); }
+    public List<Arbitraje> getArbitrajes() {
+        return arbitrajes;
+    }
 
-    public Estadio getEstadio() { return estadio; }
-    public void setEstadio(Estadio estadio) { this.estadio = estadio; }
+    public void setArbitrajes(List<Arbitraje> arbitrajes) {
+        this.arbitrajes = arbitrajes;
+    }
 
-    public List<Evento> getEventos() { return eventos; }
-    public void setEventos(List<Evento> eventos) { this.eventos = eventos; }
+    public void agregarArbitraje(Arbitraje arbitraje) {
+        this.arbitrajes.add(arbitraje);
+    }
+
+    public Estadio getEstadio() {
+        return estadio;
+    }
+
+    public void setEstadio(Estadio estadio) {
+        this.estadio = estadio;
+    }
+
+    public List<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
+    }
 
     public void agregarEvento(TipoEvento tipo, int minuto, Jugador jugador) {
         boolean estaJugando = false;
@@ -66,6 +88,7 @@ public class Partido {
                 break;
             }
         }
+
         if (estaJugando) {
             Evento evento = new Evento(tipo, minuto, jugador);
             this.eventos.add(evento);
@@ -75,20 +98,45 @@ public class Partido {
         }
     }
 
-    public Date getFecha() { return this.fecha; }
-    public void setFecha(Date fecha) { this.fecha = fecha; }
+    public Date getFecha() {
+        return this.fecha;
+    }
 
-    public Time getHorario() { return this.horario; }
-    public void setHorario(Time horario) { this.horario = horario; }
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
-    public int getDuracion() { return this.duracion; }
-    public void setDuracion(int duracion) { this.duracion = duracion; }
+    public Time getHorario() {
+        return this.horario;
+    }
 
-    public int getTiempoAdicional() { return this.tiempoAdicional; }
-    public void setTiempoAdicional(int tiempoAdicional) { this.tiempoAdicional = tiempoAdicional; }
+    public void setHorario(Time horario) {
+        this.horario = horario;
+    }
 
-    public void setFase(Fase fase) { this.fase= fase; }
-    public Fase getFase(){ return this.fase; }
+    public int getDuracion() {
+        return this.duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    public int getTiempoAdicional() {
+        return this.tiempoAdicional;
+    }
+
+    public void setTiempoAdicional(int tiempoAdicional) {
+        this.tiempoAdicional = tiempoAdicional;
+    }
+
+    public void setFase(Fase fase) {
+        this.fase = fase;
+    }
+
+    public Fase getFase() {
+        return this.fase;
+    }
 
     public void mostrarAlineaciones() {
         System.out.println("------ ALINEACIONES -------");
@@ -102,19 +150,22 @@ public class Partido {
         }
     }
 
-    public void mostrarEventos(){
+    public void mostrarEventos() {
         System.out.println("------ EVENTOS -------");
-        for (Evento e : this.eventos){
-            System.out.println(e.getMinuto() + "' - "+ e.getTipo() + " - " + e.getJugador().getNombre());
+        for (Evento e : this.eventos) {
+            System.out.println(e.getMinuto() + "' - " + e.getTipo() + " - " + e.getJugador().getNombre());
         }
     }
 
-    public void mostrarResultado(){ System.out.println(this.participaciones.get(0).getSeleccion().getNombreFederacion() + " " + this.participaciones.get(0).cantidadGoles() + "-" + this.participaciones.get(1).cantidadGoles() + " " + this.participaciones.get(1).getSeleccion().getNombreFederacion()); }
+    public void mostrarResultado() {
+        System.out.println(this.participaciones.get(0).getSeleccion().getNombreFederacion() + " " + this.participaciones.get(0).cantidadGoles() + "-" + this.participaciones.get(1).cantidadGoles() + " " + this.participaciones.get(1).getSeleccion().getNombreFederacion());
+    }
+
     public boolean tieneSeleccionesSuficientes() {
         return this.participaciones.size() == 2;
     }
 
-    public boolean esValidoArbitraje(){
+    public boolean esValidoArbitraje() {
         boolean arbPrincipal = false;
         boolean asistente1 = false;
         boolean asistente2 = false;
@@ -131,7 +182,8 @@ public class Partido {
         }
         return arbPrincipal && asistente1 && asistente2 && cuartoArb && varPrincipal && varAsistente;
     }
-    public void fichaTecnica(){
+
+    public void fichaTecnica() {
         this.mostrarAlineaciones();
         System.out.println("");
         System.out.println("");
