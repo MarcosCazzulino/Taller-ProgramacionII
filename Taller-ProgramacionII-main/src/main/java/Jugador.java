@@ -40,4 +40,27 @@ public class Jugador extends Persona {
                 evento.setJugador(this);
             }
         }
-}}
+    }
+
+    public void informeDiscJugador(){
+        int amarillas=0, rojas=0;
+        for (Evento e: this.eventos){
+            if (e.getTipo()==TipoEvento.TARJETA_AMARILLA || e.getTipo()==TipoEvento.DOBLE_AMARILLA){
+                amarillas++;
+            } else if (e.getTipo()==TipoEvento.TARJETA_ROJA) {
+                rojas++;
+            }
+        }
+        System.out.println(this.getNombre() + ":");
+        if (amarillas>0){
+            System.out.println("Tiene " + amarillas + " tarjetas amarillas.");
+        } else {
+            System.out.println("No tiene tarjetas amarillas.");
+        }
+        if (rojas>0){
+            System.out.println("Tiene " + rojas + " tarjetas rojas");
+        } else {
+            System.out.println("No tiene tarjetas rojas.");
+        }
+    }
+}
