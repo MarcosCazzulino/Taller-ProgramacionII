@@ -23,8 +23,39 @@ public class Grupo {
     }
 
     public int obtenerPuntos(Seleccion s) {
-        // (Victoria = 3 puntos, Empate = 1 punto, Derrota = 0 puntos).
-        return 0;
+        // Si la selección no se encuentra en este grupo, retorna 0
+        if (!this.selecciones.contains(s)) {
+            return 0;
+        }
+
+        int puntos = 0;
+        for (Participacion partSelActual : s.getParticipaciones()) {
+            Partido partido = partSelActual.getPartido();
+
+            // Se valida que el partido pertenezca a esta fase
+            if (partido.getFase() == this.fase) {
+                Participacion participacionRival = null;
+                for (Participacion pRival : partido.getParticipaciones()) {
+                    // Se valida que no sea la misma selección
+                    if (pRival.getSeleccion() != s) {
+                        participacionRival = pRival;
+                        break;
+                    }
+                }
+
+                if (participacionRival != null) {
+                    int golesSelActual = partSelActual.cantidadGoles();
+                    int golesRival = participacionRival.cantidadGoles();
+
+                    if (golesSelActual > golesRival) {
+                        puntos += 3;
+                    } else if (golesSelActual == golesRival) {
+                        puntos += 1;
+                    }
+                }
+            }
+        }
+        return puntos;
     }
 
     public String getIdentificacion() { return identificacion; }
