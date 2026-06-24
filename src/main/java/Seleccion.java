@@ -33,14 +33,14 @@ public class Seleccion {
     }
 
     public List<DirectorTecnico> getDirectorTecnico() { return this.directorTecnico; }
-    public void setDirectorTecnico(ArrayList<DirectorTecnico> directorTecnico) { this.directorTecnico = directorTecnico; }
+    public void setDirectorTecnico(List<DirectorTecnico> directorTecnico) { this.directorTecnico = directorTecnico; }
     public void agregarDT(DirectorTecnico dt){ this.directorTecnico.add(dt); }
 
-    public void setJugadores(ArrayList<Jugador> jugadores) { this.jugadores= jugadores;}
+    public void setJugadores(List<Jugador> jugadores) { this.jugadores= jugadores;}
     public List<Jugador> getJugadores() { return jugadores; }
     public void agregarJugador(Jugador j) { this.jugadores.add(j); }
 
-    public void setParticipaciones(ArrayList<Participacion> participaciones) { this.participaciones= participaciones; }
+    public void setParticipaciones(List<Participacion> participaciones) { this.participaciones= participaciones; }
     public List<Participacion> getParticipaciones() { return participaciones; }
     public void agregarParticipacion(Participacion p) { this.participaciones.add(p); }
 
@@ -78,37 +78,5 @@ public class Seleccion {
             instancia = p.getPartido().getFase().getNombre();
         }
         return instancia;
-    }
-
-    public void resultadosSeleccion(){
-        System.out.println("Selección: "+ this.nombreFederacion);
-        System.out.println("Puntaje: "+ this.getGrupo().obtenerPuntos(this));
-        System.out.println("Instancia: "+ this.instanciaAlcanzada());
-    }
-
-    public void informeDiscSelec(){
-        if (this.jugadores.isEmpty()){
-            System.out.println("No hay jugadores en la selección");
-            return;
-        }
-        for (Jugador j: this.jugadores){
-            int amarillas = 0, rojas= 0;
-            for (Evento e: j.getEventos()){
-                if (e.getTipo()==TipoEvento.TARJETA_AMARILLA || e.getTipo()==TipoEvento.DOBLE_AMARILLA){
-                    amarillas++;
-                } else if (e.getTipo()==TipoEvento.TARJETA_ROJA) {
-                    rojas++;
-                }
-            }
-            if (amarillas>0 && rojas>0){
-                System.out.println(j.getNombre() + ": " + amarillas + " amarillas, " + rojas + " rojas.");
-            } else if (amarillas>0 && rojas==0) {
-                System.out.println(j.getNombre() + ": " + amarillas + " amarillas.");
-            } else if (amarillas==0 && rojas>0) {
-                System.out.println(j.getNombre() + ": " + rojas + " rojas.");
-            } else {
-                System.out.println(j.getNombre() + ": sin tarjetas");
-            }
-        }
     }
 }

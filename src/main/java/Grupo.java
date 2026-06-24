@@ -35,7 +35,7 @@ public class Grupo {
             Partido partido = partSelActual.getPartido();
 
             // Se valida que el partido pertenezca a esta fase
-            if (partido.getFase() == this.fase) {
+            if (partido.getFase().getNombre() == this.fase.getNombre()) {
                 Participacion participacionRival = null;
                 for (Participacion pRival : partido.getParticipaciones()) {
                     // Se valida que no sea la misma selección

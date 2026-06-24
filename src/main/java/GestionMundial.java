@@ -22,7 +22,6 @@ public class GestionMundial {
     }
 
 
-
     public void setGrupos(List<Grupo> grupos) {
         this.grupos = grupos;
     }
@@ -49,6 +48,72 @@ public class GestionMundial {
 
     public void agregarSeleccion(Seleccion s) {
         this.selecciones.add(s);
+    }
+
+    public void resultadosSeleccion(Seleccion s){
+        if (!this.selecciones.contains(s)) {
+            throw new IllegalArgumentException("Esta selección no participa en el Mundial");
+        }
+
+        int puntos = 0;
+        if (s.getGrupo() != null) {
+            puntos = s.getGrupo().obtenerPuntos(s);
+        }
+
+        NombreFase instanciaAlcanzada = s.instanciaAlcanzada();
+        System.out.println("----------------------------");
+        System.out.println("Selección: " + s.getNombreFederacion());
+        System.out.println("Fase de Grupos: " + puntos + " pts");
+        System.out.println("Instancia: "+ s.instanciaAlcanzada());
+    }
+
+    public void informeDiscSelec(Seleccion s){
+        if (!this.selecciones.contains(s)) {
+            throw new IllegalArgumentException("Esta selección no forma parte del mundial");
+        }
+
+        System.out.println("------ Informe Disciplinario de " + s.getNombreFederacion() + " ------");
+        if (s.getJugadores().isEmpty()) {
+            System.out.println("No hay jugadores cargados en el plantel");
+            return;
+        }
+
+        for (Jugador j : s.getJugadores()){
+            int amarillas = 0, rojas= 0;
+
+            for (Evento e: j.getEventos()){
+                if (e.getTipo() == TipoEvento.TARJETA_AMARILLA || e.getTipo() == TipoEvento.DOBLE_AMARILLA){
+                    amarillas++;
+                }
+
+                if (e.getTipo() == TipoEvento.DOBLE_AMARILLA || e.getTipo() == TipoEvento.TARJETA_ROJA) {
+                    rojas++;
+                }
+            }
+
+            if (amarillas > 0 && rojas > 0){
+                System.out.println("- " + j.getNombre() + "(Nro. " + j.getDorsal() + "): " + amarillas + " amarillas | " + rojas + " rojas.");
+            } else if (amarillas > 0 && rojas == 0) {
+                System.out.println("- " + j.getNombre() + "(Nro. " + j.getDorsal() + "): " + amarillas + " amarillas.");
+            } else if (amarillas == 0 && rojas > 0) {
+                System.out.println("- " + j.getNombre() + "(Nro. " + j.getDorsal() + "): " + rojas + " rojas.");
+            } else {
+                System.out.println("- " + j.getNombre() + "(Nro. " + j.getDorsal() + "): " + " sin tarjetas.");
+            }
+        }
+        System.out.println("---------------------------------------------");
+    }
+
+    public void estadisticasSede(Sede sede) {
+        if (sede == null) {
+            throw new IllegalArgumentException("La sede no puede ser nula");
+        }
+
+        System.out.println("------ Estadísticas de Sede ------");
+        System.out.println("Ciudad: " + sede.getCiudad());
+        System.out.println("Capacidad: " + sede.capacidadSede() + " espectadores");
+        System.out.println("Partidos jugados: " + sede.cantidadPartidosPorCiudad());
+        System.out.println("----------------------------------");
     }
 
     public void rankingGoleadores(){
@@ -161,11 +226,20 @@ public class GestionMundial {
     }
 
     public void planificarPartido(Fase fase, Partido partido) {
+        if (!partido.esValidoArbitraje()) {
+            throw new IllegalStateException("El equipo de arbitrajes es inválido");
+        }
+
+        if (!partido.tieneSeleccionesSuficientes()) {
+            throw new IllegalStateException("Cantidad de selecciones insuficientes para disputar el partido");
+        }
+
         if (fase.getPartidos().size() < fase.cantidadMaximaPartidos()) {
             fase.agregarPartido(partido);
             partido.setFase(fase);
+            this.partidos.add(partido);
         } else {
-            System.out.println("La fase ya alcanzó el máximo de partidos.");
+            throw new IllegalStateException("Esta fase ya alcanzó el máximo de partidos");
         }
     }
 }
