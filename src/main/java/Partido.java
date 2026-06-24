@@ -56,21 +56,22 @@ public class Partido {
     public List<Evento> getEventos() { return eventos; }
     public void setEventos(List<Evento> eventos) { this.eventos = eventos; }
 
-//    public void agregarEvento(TipoEvento tipo, int minuto, Jugador jugador) {
-//        boolean estaJugando = false;
-//
-//        for (Participacion p : this.participaciones) {
-//            if (p.getSeleccion() == jugador.getSeleccion()) {
-//                estaJugando = true;
-//                break;
-//            }
-//        }
-//        if (estaJugando) {
-//            this.eventos.add(new Evento(tipo, minuto, this, jugador));
-//        } else {
-//            System.out.println("El jugador no está en el partido.");
-//        }
-//    }
+    public void agregarEvento(TipoEvento tipo, int minuto, Jugador jugador) {
+        boolean estaJugando = false;
+
+        for (Participacion p : this.participaciones) {
+            Seleccion s = p.getSeleccion();
+            if (s.getJugadores() != null && s.getJugadores().contains(jugador)) {
+                estaJugando = true;
+                break;
+            }
+        }
+        if (estaJugando) {
+            this.eventos.add(new Evento(tipo, minuto, jugador));
+        } else {
+            throw new IllegalArgumentException("El jugador " + jugador.getNombre() + " no participa en este partido");
+        }
+    }
 
     public Date getFecha() { return this.fecha; }
     public void setFecha(Date fecha) { this.fecha = fecha; }
