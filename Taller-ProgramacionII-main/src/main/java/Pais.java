@@ -34,5 +34,5 @@ public class Pais {
 
     public void setSedes(List<Sede> sedes){ this.sedes= sedes; }
     public List<Sede> getSedes(){ return this.sedes; } 
-    public void agregarSede(Sede sede){ this.sedes.add(sede) } 
+    public void agregarSede(Sede sede){ this.sedes.add(sede); }
 }

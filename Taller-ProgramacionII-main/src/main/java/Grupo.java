@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Grupo {
     private String identificacion;
@@ -66,4 +68,26 @@ public class Grupo {
 
     public List<Seleccion> getSelecciones() { return selecciones; }
     public void setSelecciones(List<Seleccion> selecciones){ this.selecciones=selecciones; }
+
+    public void mostrarTablaPosiciones() {
+        List<Seleccion> tabla = new ArrayList<>(this.selecciones);
+
+        Collections.sort(tabla, new Comparator<Seleccion>() {
+            @Override
+            public int compare(Seleccion s1, Seleccion s2) {
+                return compararSelecciones(s1, s2);
+            }
+        });
+        System.out.println("TABLA DE POSICIONES - GRUPO " + this.identificacion);
+
+        int posicion = 1;
+        for (Seleccion s : tabla) {
+            System.out.println(posicion + "° " + s.getNombreFederacion() + " - " + obtenerPuntos(s) + " pts");
+            posicion++;
+        }
+    }
+
+    public int compararSelecciones(Seleccion s1, Seleccion s2) {
+        return Integer.compare(obtenerPuntos(s2), obtenerPuntos(s1));
+    }
 }
