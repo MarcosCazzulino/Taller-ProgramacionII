@@ -23,12 +23,11 @@ public class Participacion {
 
         for (Evento e : this.partido.getEventos()) {
             if (e.getTipo() == TipoEvento.GOL || e.getTipo() == TipoEvento.PENAL_CONVERTIDO) {
-                if (e.getJugador().getSeleccion() == this.seleccion) {
+                if (this.seleccion.getJugadores() != null && this.seleccion.getJugadores().contains(e.getJugador())) {
                     goles++;
                 }
             }
         }
-
         return goles;
     }
 
@@ -37,7 +36,7 @@ public class Participacion {
 
         for (Evento e : this.partido.getEventos()) {
             if (e.getTipo() == TipoEvento.TARJETA_AMARILLA || e.getTipo() == TipoEvento.DOBLE_AMARILLA) {
-                if (e.getJugador().getSeleccion() == this.seleccion) {
+                if (this.seleccion.getJugadores() != null && this.seleccion.getJugadores().contains(e.getJugador())) {
                     amarillas++;
                 }
             }
@@ -51,7 +50,7 @@ public class Participacion {
 
         for (Evento e : this.partido.getEventos()) {
             if (e.getTipo() == TipoEvento.TARJETA_ROJA || e.getTipo() == TipoEvento.DOBLE_AMARILLA) {
-                if (e.getJugador().getSeleccion() == this.seleccion) {
+                if (this.seleccion.getJugadores() != null && this.seleccion.getJugadores().contains(e.getJugador())) {
                     rojas++;
                 }
             }
