@@ -79,4 +79,57 @@ public class GestionMundial {
         }
         System.out.println("-----------------------------------");
     }
+
+    public void registrarEvento(Partido partido, TipoEvento tipo, int minuto, Jugador jugador) {
+        if (!this.partidos.contains(partido)) {
+            throw new IllegalArgumentException("El partido no está registrado en el fixture del mundial");
+        }
+
+        try {
+            partido.agregarEvento(tipo, minuto, jugador);
+            System.out.println("| " + minuto + "' · " + tipo + " - " + jugador.getNombre() + " |");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error al registrar el evento: " + e.getMessage());
+        }
+    }
+
+    public void registrarSeleccion(Seleccion s) {
+        if (s != null && !this.selecciones.contains(s)) {
+            this.selecciones.add(s);
+            System.out.println(s.getNombreFederacion() + " ha sido registrada en el Mundial");
+        }
+    }
+
+    public void agregarJugadorASeleccion(Seleccion s, Jugador jug) {
+        if (!this.selecciones.contains(s)) {
+            throw new IllegalArgumentException("Esta selección no está registrada en el Mundial");
+        }
+
+        for (Seleccion selec : this.selecciones) {
+            if (selec.getJugadores() != null && selec.getJugadores().contains(jug)) {
+                throw new IllegalArgumentException("Este jugador ya forma parte de la Selección");
+            }
+        }
+
+        s.agregarJugador(jug);
+        System.out.println(jug.getNombre() + " se ha integrado al plantel de " + s.getNombreFederacion());
+    }
+
+    public void agregarDTASeleccion(Seleccion s, DirectorTecnico dt) {
+        if (!this.selecciones.contains(s)) {
+            throw new IllegalArgumentException("Esta selección no forma parte del Mundial");
+        }
+
+        s.agregarDT(dt);
+        System.out.println(dt.getNombre() + " es ahora el DT de " + s.getNombreFederacion());
+    }
+
+    public void agregarCuerpoTecnico(Seleccion s, CuerpoTecnico ct) {
+        if (!this.selecciones.contains(s)) {
+            throw new IllegalArgumentException("Esta selección no forma parte del mundial");
+        }
+
+        s.agregarCuerpoTecnico(ct);
+        System.out.println(ct.getNombre() + " (" + ct.getRol() + ") se incorporó al cuerpo técnico de " + s.getNombreFederacion());
+    }
 }

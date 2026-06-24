@@ -67,7 +67,9 @@ public class Partido {
             }
         }
         if (estaJugando) {
-            this.eventos.add(new Evento(tipo, minuto, jugador));
+            Evento evento = new Evento(tipo, minuto, jugador);
+            this.eventos.add(evento);
+            jugador.agregarEvento(evento);
         } else {
             throw new IllegalArgumentException("El jugador " + jugador.getNombre() + " no participa en este partido");
         }
