@@ -1,7 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Estadio {
     private String nombre;
     private int capacidad;
-    private Sede sede; // Relación con la clase Sede
+    private Sede sede;
+    private List<Partido> partidos;
 
     public Estadio(String nombre, int capacidad, Sede sede) {
         this.nombre = nombre;
