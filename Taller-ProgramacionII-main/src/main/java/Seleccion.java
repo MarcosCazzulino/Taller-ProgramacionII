@@ -32,11 +32,11 @@ public class Seleccion {
         this.participaciones = new ArrayList<Participacion>();
     }
 
-    public ArrayList<DirectorTecnico> getDirectorTecnico() { return this.directorTecnico; }
+    public List<DirectorTecnico> getDirectorTecnico() { return this.directorTecnico; }
     public void setDirectorTecnico(ArrayList<DirectorTecnico> directorTecnico) { this.directorTecnico = directorTecnico; }
     public void agregarDT(DirectorTecnico dt){ this.directorTecnico.add(dt); }
 
-    public void setJugadores(ArrayList<Jugador> jugadores) { this.jugadores= jugdaores;}
+    public void setJugadores(ArrayList<Jugador> jugadores) { this.jugadores= jugadores;}
     public List<Jugador> getJugadores() { return jugadores; }
     public void agregarJugador(Jugador j) { this.jugadores.add(j); }
 
@@ -44,7 +44,7 @@ public class Seleccion {
     public List<Participacion> getParticipaciones() { return participaciones; }
     public void agregarParticipacion(Participacion p) { this.participaciones.add(p); }
 
-    public ArrayList<CuerpoTecnico> getCuerpoTecnico(){ return this.cuerpoTecnico }
+    public List<CuerpoTecnico> getCuerpoTecnico(){ return this.cuerpoTecnico; }
     public void setCuerpoTecnico(List<CuerpoTecnico> cuerpoTecnico) { this.cuerpoTecnico = cuerpoTecnico; }
     public void agregarCuerpoTecnico(CuerpoTecnico cuerpTec) { this.cuerpoTecnico.add(cuerpTec); }
 
@@ -103,7 +103,7 @@ public class Seleccion {
     public NombreFase instanciaAlcanzada() {
         NombreFase instancia = NombreFase.GRUPOS;
 
-        for (Participacion p : participaciones) {
+        for (Participacion p : this.participaciones) {
             instancia = p.getPartido().getFase().getNombre();
         }
         return instancia;
@@ -113,5 +113,27 @@ public class Seleccion {
         System.out.println("Selección: "+ this.nombreFederacion);
         System.out.println("Puntaje: "+ this.calcularPuntosGrupo());
         System.out.println("Instancia: "+ this.instanciaAlcanzada());
+    }
+
+    public void informeDiscSelec(){
+        for (Jugador j: this.jugadores){
+            int amarillas = 0, rojas= 0;
+            for (Evento e: j.getEventos()){
+                if (e.getTipo()==TipoEvento.TARJETA_AMARILLA || e.getTipo()==TipoEvento.DOBLE_AMARILLA){
+                    amarillas++;
+                } else if (e.getTipo()==TipoEvento.TARJETA_ROJA) {
+                    rojas++;
+                }
+            }
+            if (amarillas>0 && rojas>0){
+                System.out.println(j.getNombre() + ": " + amarillas + " amarillas, " + rojas + " rojas.");
+            } else if (amarillas>0 && rojas==0) {
+                System.out.println(j.getNombre() + ": " + amarillas + " amarillas.");
+            } else if (amarillas==0 && rojas>0) {
+                System.out.println(j.getNombre() + ": " + rojas + " rojas.");
+            } else {
+                System.out.println(j.getNombre() + ": sin tarjetas");
+            }
+        }
     }
 }

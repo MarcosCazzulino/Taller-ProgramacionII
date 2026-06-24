@@ -31,6 +31,8 @@ public class Jugador extends Persona {
     public float getAltura() { return altura; }
     public void setAltura(float altura) { this.altura = altura; }
 
+    public List<Evento> getEventos(){ return this.eventos;}
+
     public void agregarEvento(Evento evento) {
         if (evento != null) {
             this.eventos.add(evento);
