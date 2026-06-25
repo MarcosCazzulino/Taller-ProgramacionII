@@ -21,6 +21,9 @@ public class GestionMundial {
         this.fases = fases;
     }
 
+    public List<Grupo> getGrupos() {
+        return grupos;
+    }
 
     public void setGrupos(List<Grupo> grupos) {
         this.grupos = grupos;
@@ -40,6 +43,10 @@ public class GestionMundial {
 
     public void setSelecciones(List<Seleccion> selecciones) {
         this.selecciones = selecciones;
+    }
+
+    public void agregarGrupo(Grupo g) {
+        this.grupos.add(g);
     }
 
     public void agregarPartido(Partido p) {
