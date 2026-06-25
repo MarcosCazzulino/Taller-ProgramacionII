@@ -11,38 +11,6 @@ public class Main {
         GestionMundial gestion = new GestionMundial();
         gestion.configurarFasesEliminacion();
 
-        Scanner sc = new Scanner(System.in);
-        int opcion = 0;
-
-        while (opcion != 3) {
-            System.out.println("----- Copa del Mundo 2026 | MEX CAN USA -----");
-            System.out.println("1. Ver informes y estadísticas");
-            System.out.println("2. Panel de Administración");
-            System.out.println("3. Salir");
-            System.out.println("");
-            System.out.println("Elige una opción:");
-
-            try {
-                opcion = sc.nextInt();
-                switch (opcion) {
-                    case 1:
-                        menuInformes(sc, gestion);
-                        break;
-                    case 2:
-                        menuAdministracion(sc, gestion);
-                        break;
-                    case 3:
-                        System.out.println("Saliendo del programa... ¡Disfruta la Copa del Mundo!");
-                        break;
-                    default:
-                        System.out.println("Opción inválida. Vuelva a intentar");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Ingrese un número, por favor");
-            }
-            sc.close();
-        }
-
         // Estados Unidos
         Pais estadosUnidos = new Pais("Estados Unidos", "Azul, Blanco y Rojo");
         // --- New York
@@ -119,35 +87,36 @@ public class Main {
 
         grupoA.agregarSeleccion(sParaguay);
 
-        Partido primerPartido = new Partido(new Date(), Time.valueOf("16:00:00"), 90, 5, faseGrupos, metLife);
+        Scanner sc = new Scanner(System.in);
+        int opcion = 0;
 
-        Participacion partUSA = new Participacion(true, primerPartido, sUSA);
-        Participacion partPar = new Participacion(false, primerPartido, sParaguay);
-        primerPartido.agregarParticipacion(partUSA);
-        primerPartido.agregarParticipacion(partPar);
+        while (opcion != 3) {
+            System.out.println("\n----- Copa del Mundo 2026 | MEX CAN USA -----");
+            System.out.println("1. Ver informes y estadísticas");
+            System.out.println("2. Panel de Administración");
+            System.out.println("3. Salir");
+            System.out.println("");
+            System.out.println("Elige una opción:");
 
-        Pais paisesBajos = new Pais("Países Bajos", "Rojo, Blanco y Azul");
-        primerPartido.agregarArbitraje(new Arbitraje(CategoriaArbitro.PRINCIPAL, primerPartido, new Arbitro("Danny Makkelie", 1983, 15, paisesBajos)));
-        primerPartido.agregarArbitraje(new Arbitraje(CategoriaArbitro.ASISTENTE1, primerPartido, new Arbitro("Árbitro 2", 1988, 10, paisesBajos)));
-        primerPartido.agregarArbitraje(new Arbitraje(CategoriaArbitro.ASISTENTE2, primerPartido, new Arbitro("Árbitro 3", 1985, 9, paisesBajos)));
-        primerPartido.agregarArbitraje(new Arbitraje(CategoriaArbitro.CUARTOARBITRO, primerPartido, new Arbitro("Árbitro 4", 1981, 11, paisesBajos)));
-        primerPartido.agregarArbitraje(new Arbitraje(CategoriaArbitro.VARPRINCIPAL, primerPartido, new Arbitro("Árbitro 5", 1979, 17, paisesBajos)));
-        primerPartido.agregarArbitraje(new Arbitraje(CategoriaArbitro.VARASISTENTE, primerPartido, new Arbitro("Árbitro 6", 1989, 8, paisesBajos)));
-
-        try {
-            gestion.planificarPartido(faseGrupos, primerPartido);
-            System.out.println("Partido planifica con éxito");
-        } catch (IllegalStateException e) {
-            System.out.println("No se pudo planificar el partido: " + e.getMessage());
+            try {
+                opcion = Integer.parseInt(sc.nextLine());
+                switch (opcion) {
+                    case 1:
+                        menuInformes(sc, gestion);
+                        break;
+                    case 2:
+                        menuAdministracion(sc, gestion);
+                        break;
+                    case 3:
+                        System.out.println("Saliendo del programa... ¡Disfruta la Copa del Mundo!");
+                        break;
+                    default:
+                        System.out.println("Opción inválida. Vuelva a intentar");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un número, por favor");
+            }
         }
-
-        // Simulación de eventos
-        System.out.println("---------- Eventos en el Partido ----------");
-        gestion.registrarEvento(primerPartido, TipoEvento.GOL, 11, pulisic);
-        gestion.registrarEvento(primerPartido, TipoEvento.TARJETA_AMARILLA, 24, almiron);
-        gestion.registrarEvento(primerPartido, TipoEvento.GOL, 32, almiron);
-        gestion.registrarEvento(primerPartido, TipoEvento.TARJETA_ROJA, 59, pulisic);
-        gestion.registrarEvento(primerPartido, TipoEvento.DOBLE_AMARILLA, 88,almiron);
     }
 
     private static void menuInformes(Scanner sc, GestionMundial gestion) {
@@ -164,8 +133,7 @@ public class Main {
             System.out.println("Seleccione una opción:");
 
             try {
-                opcion = sc.nextInt();
-                sc.nextLine();
+                opcion = Integer.parseInt(sc.nextLine());
                 switch (opcion) {
                     case 1:
                         if (gestion.getGrupos().isEmpty()) {
@@ -178,10 +146,10 @@ public class Main {
                         }
 
                         System.out.println("Ingresa el grupo que quieres ver: ");
-                        String letra = sc.nextLine().toLowerCase();
+                        String letra = sc.nextLine().trim();
                         boolean grupoEncontrado = false;
                         for (Grupo g : gestion.getGrupos()) {
-                            if (g.getIdentificacion().equals(letra)) {
+                            if (g.getIdentificacion().equalsIgnoreCase(letra)) {
                                 g.mostrarTablaPosiciones();
                                 grupoEncontrado = true;
                                 break;
@@ -225,7 +193,7 @@ public class Main {
                         }
 
                         System.out.println("Seleccione el partido que quiere ver: ");
-                        int numeroPartido = sc.nextInt() - 1;
+                        int numeroPartido = Integer.parseInt(sc.nextLine());
                         if (numeroPartido >= 0 && numeroPartido < gestion.getPartidos().size()) {
                             gestion.getPartidos().get(numeroPartido).fichaTecnica();
                         } else {
@@ -245,140 +213,50 @@ public class Main {
         }
     }
 
-    private static void menuAdministracion(Scanner sc, GestionMundial gestion){
+    private static void menuAdministracion(Scanner sc, GestionMundial gestion) {
         int opcion = 0;
-        while (opcion != 4) {
+        while (opcion != 9) {
             System.out.println("----- Panel de Administración -----");
-            System.out.println("1. Registrar nueva Selección");
-            System.out.println("2. Incorporar un nuevo Jugador");
-            System.out.println("3. Registrar Evento en vivo");
-            System.out.println("4. Volver al Menú Principal");
+            System.out.println("1. Registrar País");
+            System.out.println("2. Registrar Sede");
+            System.out.println("3. Registrar Estadio");
+            System.out.println("4. Registrar Selección");
+            System.out.println("5. Incorporar Jugador a una Selección");
+            System.out.println("6. Asignar Director Técnico a una Selección");
+            System.out.println("7. Asignar Arbitraje a un Partido");
+            System.out.println("8. Registrar Evento en vivo para un Partido");
+            System.out.println("9. Volver al Menú Principal");
             System.out.println("");
-            System.out.println("Seleccione una opción:");
+            System.out.print("Seleccione una opción: ");
 
             try {
-                opcion = sc.nextInt();
-                sc.nextLine();
+                opcion = Integer.parseInt(sc.nextLine());
                 switch (opcion) {
                     case 1:
-                        System.out.println("Ingrese el nombre de la Federación (Ej: AFA): ");
-                        String nombreFed = sc.nextLine().toUpperCase();
-                        System.out.println("Color Camiseta Principal: ");
-                        String camPrinc = sc.nextLine();
-                        System.out.println("Color Camiseta Secundaria: ");
-                        String camSec = sc.nextLine();
-                        System.out.println("¿Es cabeza de Grupo? (Sí/No):");
-                        String cabezaScan = sc.nextLine();
-                        boolean cabezaBool = cabezaScan.toLowerCase().trim().equals("si") || cabezaScan.toLowerCase().trim().equals("sí") ? true : false;
-                        System.out.println("Ranking FIFA (Número):");
-                        int rank = sc.nextInt();
-                        sc.nextLine();
-
-                        if (gestion.getGrupos().isEmpty()) {
-                            System.out.println("Para agregar una selección debe haber un grupo creado");
-                            break;
-                        }
-                        Grupo gDestino = gestion.getGrupos().get(0);
-                        System.out.println("Nombre del País de origen: ");
-                        String nomPais = sc.nextLine();
-                        System.out.println("Colores de la Bandera (Ej.: Azul y Blanco):");
-                        String nuevaBandera = sc.nextLine();
-                        Pais nuevoPais = new Pais(nomPais, nuevaBandera);
-
-                        Seleccion nuevaSel = new Seleccion(nombreFed, camPrinc, camSec, cabezaBool, rank, gDestino, nuevoPais);
-                        gestion.registrarSeleccion(nuevaSel);
-                        gDestino.agregarSeleccion(nuevaSel);
+                        registrarPais(sc, gestion);
                         break;
-
                     case 2:
-                        Seleccion selDestino = seleccionarSeleccion(sc, gestion);
-                        if (selDestino == null) break;
-
-                        System.out.println("Nombre completo del Jugador: ");
-                        String nomJug = sc.nextLine();
-                        System.out.println("Año de nacimiento: ");
-                        int anioNac = sc.nextInt();
-                        System.out.println("Número de Dorsal: ");
-                        int dorsal = sc.nextInt();
-                        System.out.println("POSICIONES: 1. Arquero | 2. Defensor | 3. Mediocampista | 4. Delantero");
-                        System.out.println("Seleccione una opción: ");
-                        int posOpcion = sc.nextInt();
-
-                        Posicion pos = Posicion.DELANTERO;
-                        if (posOpcion == 1) pos = Posicion.ARQUERO;
-                        if (posOpcion == 2) pos = Posicion.DEFENSOR;
-                        if (posOpcion == 3) pos = Posicion.MEDIOCAMPISTA;
-
-                        System.out.println("Peso (kg):");
-                        float peso = sc.nextFloat();
-                        System.out.println("Altura (cm):");
-                        float altura = sc.nextFloat();
-                        sc.nextLine();
-
-                        Jugador nuevoJugador = new Jugador(nomJug, anioNac, dorsal, pos, peso, altura);
-                        gestion.agregarJugadorASeleccion(selDestino, nuevoJugador);
+                        registrarSede(sc, gestion);
                         break;
-
                     case 3:
-                        if (gestion.getPartidos().isEmpty()) {
-                            System.out.println("No hay partidos cargados");
-                            break;
-                        }
-
-                        Partido pActual = gestion.getPartidos().get(0);
-                        System.out.println("Registrando evento en el partido: " +
-                                pActual.getParticipaciones().get(0).getSeleccion().getNombreFederacion() + " vs " +
-                                pActual.getParticipaciones().get(1).getSeleccion().getNombreFederacion());
-
-                        System.out.println("Eventos: 1.Gol | 2.Tarjeta Amarilla | 3.Tarjeta Roja | 4.Doble Amarilla | 5.Penal Cometido | 6.Penal Convertido | 7.Penal Errado | 8.Sustitución | 9.Lesión");
-                        System.out.print("Seleccione el evento: ");
-                        int tipoOpt = sc.nextInt();
-                        TipoEvento tipo = TipoEvento.GOL;
-                        if (tipoOpt == 2) tipo = TipoEvento.TARJETA_AMARILLA;
-                        if (tipoOpt == 3) tipo = TipoEvento.TARJETA_ROJA;
-                        if (tipoOpt == 4) tipo = TipoEvento.DOBLE_AMARILLA;
-                        if (tipoOpt == 5) tipo = TipoEvento.PENAL_COMETIDO;
-                        if (tipoOpt == 6) tipo = TipoEvento.PENAL_CONVERTIDO;
-                        if (tipoOpt == 7) tipo = TipoEvento.PENAL_ERRADO;
-                        if (tipoOpt == 8) tipo = TipoEvento.SUSTITUCION;
-                        if (tipoOpt == 9) tipo = TipoEvento.LESION;
-
-                        System.out.print("Minuto del evento: ");
-                        int min = sc.nextInt();
-
-                        System.out.println("Jugadores en el partido:");
-//                        int idx = 1;
-//                        ArrayList<Jugador> jugadoresPartido = new ArrayList<>();
-//                        for (Participacion part : pActual.getParticipaciones()) {
-//                            for (Jugador j : part.getSeleccion().getNominaJugadoresO_MetodoEquivalente()) {
-//                                jugadoresPartido.add(j);
-//                                System.out.println(idx + ". " + j.getNombre() + " (" + part.getSeleccion().getNombreFederacion() + ")");
-//                                idx++;
-//                            }
-//                        }
-//
-//                        jugadoresPartido.clear();
-                        int idx = 1;
-                        ArrayList<Jugador> jugadoresPartido = new ArrayList<>();
-                        for (Participacion part : pActual.getParticipaciones()) {
-                            for (Jugador j : part.getSeleccion().getJugadores()) {
-                                jugadoresPartido.add(j);
-                                System.out.println(idx + ". " + j.getNombre() + " (" + part.getSeleccion().getNombreFederacion() + ")");
-                                idx++;
-                            }
-                        }
-
-                        System.out.print("Seleccione el número de jugador: ");
-                        int jugSel = sc.nextInt() - 1;
-
-                        if (jugSel >= 0 && jugSel < jugadoresPartido.size()) {
-                            gestion.registrarEvento(pActual, tipo, min, jugadoresPartido.get(jugSel));
-                        } else {
-                            System.out.println("Ese jugador no existe o no está en este partido.");
-                        }
+                        registrarEstadio(sc, gestion);
                         break;
-
                     case 4:
+                        registrarSeleccion(sc, gestion);
+                        break;
+                    case 5:
+                        registrarJugador(sc, gestion);
+                        break;
+                    case 6:
+                        registrarDirectorTecnico(sc, gestion);
+                        break;
+                    case 7:
+                        registrarArbitraje(sc, gestion);
+                        break;
+                    case 8:
+                        registrarEvento(sc, gestion);
+                        break;
+                    case 9:
                         break;
                     default:
                         System.out.println("Opción inválida. Vuelva a intentarlo");
@@ -386,6 +264,205 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("Ocurrió un error inesperado: " + e.getMessage());
             }
+        }
+    }
+
+    private static void registrarPais(Scanner sc, GestionMundial gestion) {
+        System.out.print("Nombre del País: ");
+        String nombre = sc.nextLine();
+        System.out.print("Colores de la Bandera (Ej.: Blanco y Azul): ");
+        String bandera = sc.nextLine();
+
+        Pais nuevoPais = new Pais(nombre, bandera);
+        System.out.println("¡País creado con éxito!");
+    }
+
+    private static void registrarSede(Scanner sc, GestionMundial gestion) {
+        System.out.print("Nombre de la Ciudad (Sede): ");
+        String ciudad = sc.nextLine();
+        System.out.print("Altura sobre el nivel del mar (metros): ");
+        float altura = sc.nextFloat();
+        sc.nextLine();
+        System.out.print("Clima: ");
+        String clima = sc.nextLine();
+        System.out.print("Zona Horaria (Ej: UTC-3): ");
+        String zona = sc.nextLine();
+
+        System.out.print("Nombre del País al que pertenece esta sede: ");
+        String nombrePais = sc.nextLine();
+        Pais paisAsociado = new Pais(nombrePais, "Bandera de " + nombrePais);
+
+        Sede nuevaSede = new Sede(paisAsociado, ciudad, altura, clima, zona);
+        paisAsociado.agregarSede(nuevaSede);
+        System.out.println("¡Sede registrada exitosamente!");
+    }
+
+    private static void registrarEstadio(Scanner sc, GestionMundial gestion) {
+        System.out.print("Nombre del Estadio: ");
+        String nombreEstadio = sc.nextLine();
+        System.out.print("Capacidad de espectadores: ");
+        int capacidad = Integer.parseInt(sc.nextLine());
+
+        System.out.print("¿En qué ciudad/sede se encuentra el estadio?: ");
+        String nombreCiudad = sc.nextLine();
+
+        Sede sedeAsociada = new Sede(null, nombreCiudad, 0, "Desconocido", "UTC");
+
+        Estadio nuevoEstadio = new Estadio(nombreEstadio, capacidad, sedeAsociada);
+        sedeAsociada.agregarEstadio(nuevoEstadio);
+        System.out.println("¡Estadio creado exitosamente!");
+    }
+
+    private static void registrarSeleccion(Scanner sc, GestionMundial gestion) {
+        System.out.print("Nombre de la Federación (Ej: AFA, FFF): ");
+        String nombreFed = sc.nextLine().toUpperCase();
+        System.out.print("Camiseta Principal: ");
+        String principal = sc.nextLine();
+        System.out.print("Camiseta Secundaria: ");
+        String secundaria = sc.nextLine();
+        System.out.print("¿Es cabeza de grupo? (Sí/No): ");
+        String cabezaScan = sc.nextLine().toLowerCase().trim();
+        boolean cabezaBool = cabezaScan.equals("si") || cabezaScan.equals("sí");
+        System.out.print("Ranking FIFA: ");
+        int ranking = Integer.parseInt(sc.nextLine());
+
+        if (gestion.getGrupos().isEmpty()) {
+            System.out.println("No hay grupos creados");
+            return;
+        }
+
+        Grupo grupoDestino = gestion.getGrupos().get(0);
+
+        System.out.print("País de la Selección: ");
+        String nombrePais = sc.nextLine();
+        System.out.println("Colores de la bandera: ");
+        String bandera = sc.nextLine();
+        Pais pais = new Pais(nombrePais, bandera);
+
+        Seleccion nuevaSel = new Seleccion(nombreFed, principal, secundaria, cabezaBool, ranking, grupoDestino, pais);
+        gestion.registrarSeleccion(nuevaSel);
+        grupoDestino.agregarSeleccion(nuevaSel);
+    }
+
+    private static void registrarJugador(Scanner sc, GestionMundial gestion) {
+        Seleccion sel = seleccionarSeleccion(sc, gestion);
+        if (sel == null) return;
+
+        System.out.print("Nombre del Jugador: ");
+        String nombre = sc.nextLine();
+        System.out.print("Año de Nacimiento: ");
+        int anio = Integer.parseInt(sc.nextLine());
+        System.out.print("Número de Dorsal: ");
+        int dorsal = Integer.parseInt(sc.nextLine());
+
+        System.out.println("Posición: 1.ARQUERO | 2.DEFENSOR | 3.MEDIOCAMPISTA | 4.DELANTERO");
+        System.out.println("Elija una opción: ");
+        int posOpt = Integer.parseInt(sc.nextLine());
+        Posicion pos = Posicion.DELANTERO;
+        if (posOpt == 1) pos = Posicion.ARQUERO;
+        if (posOpt == 2) pos = Posicion.DEFENSOR;
+        if (posOpt == 3) pos = Posicion.MEDIOCAMPISTA;
+
+        System.out.print("Peso (kg): ");
+        float peso = sc.nextFloat();
+        System.out.print("Altura (cm): ");
+        float altura = sc.nextFloat();
+
+        Jugador nuevoJugador = new Jugador(nombre, anio, dorsal, pos, peso, altura);
+        gestion.agregarJugadorASeleccion(sel, nuevoJugador);
+    }
+
+    private static void registrarDirectorTecnico(Scanner sc, GestionMundial gestion) {
+        Seleccion sel = seleccionarSeleccion(sc, gestion);
+        if (sel == null) return;
+
+        System.out.print("Nombre del DT: ");
+        String nombreDT = sc.nextLine();
+        System.out.print("Año de Nacimiento: ");
+        int nacDT = Integer.parseInt(sc.nextLine());
+        System.out.print("Año de Nombramiento en el cargo: ");
+        int nombramiento = Integer.parseInt(sc.nextLine());
+
+        DirectorTecnico nuevoDT = new DirectorTecnico(nombreDT, nacDT, nombramiento);
+        gestion.agregarDTASeleccion(sel, nuevoDT);
+    }
+
+    private static void registrarArbitraje(Scanner sc, GestionMundial gestion) {
+        if (gestion.getPartidos().isEmpty()) {
+            System.out.println("No hay partidos en el fixture para asignar árbitros.");
+            return;
+        }
+        Partido partido = gestion.getPartidos().get(0);
+
+        System.out.print("Nombre del Árbitro: ");
+        String nombreArb = sc.nextLine();
+        System.out.println("Año de nacimiento: ");
+        int anioNac = Integer.parseInt(sc.nextLine());
+        System.out.print("Años de Experiencia: ");
+        int exp = Integer.parseInt(sc.nextLine());
+        System.out.print("País de origen del Árbitro: ");
+        Pais paisArb = new Pais(sc.nextLine(), "Bandera");
+
+        Arbitro arbitro = new Arbitro(nombreArb, anioNac, exp, paisArb);
+
+        System.out.println("Roles: 1.PRINCIPAL | 2.ASISTENTE1 | 3.ASISTENTE2 | 4.CUARTOARBITRO | 5.VARPRINCIPAL | 6.VARASISTENTE");
+        System.out.println("Seleccione una opción:");
+        int rolOpt = Integer.parseInt(sc.nextLine());
+
+        CategoriaArbitro rol = CategoriaArbitro.PRINCIPAL;
+        if (rolOpt == 2) rol = CategoriaArbitro.ASISTENTE1;
+        if (rolOpt == 3) rol = CategoriaArbitro.ASISTENTE2;
+        if (rolOpt == 4) rol = CategoriaArbitro.CUARTOARBITRO;
+        if (rolOpt == 5) rol = CategoriaArbitro.VARPRINCIPAL;
+        if (rolOpt == 6) rol = CategoriaArbitro.VARASISTENTE;
+
+        Arbitraje nuevoArbitraje = new Arbitraje(rol, partido, arbitro);
+        partido.agregarArbitraje(nuevoArbitraje);
+        arbitro.getArbitrajes().add(nuevoArbitraje);
+
+        System.out.println("Árbitro asignado como " + rol + " para el encuentro");
+    }
+
+    private static void registrarEvento(Scanner sc, GestionMundial gestion) {
+        if (gestion.getPartidos().isEmpty()) {
+            System.out.println("No hay partidos en juego.");
+            return;
+        }
+        Partido pActual = gestion.getPartidos().get(0);
+
+        System.out.println("Eventos: 1.Gol | 2.Tarjeta Amarilla | 3.Tarjeta Roja | 4.Doble Amarilla | 5.Penal Cometido | 6.Penal Convertido | 7.Penal Errado | 8.Sustitución | 9.Lesión");
+        int tipoOpt = Integer.parseInt(sc.nextLine());
+        TipoEvento tipo = TipoEvento.GOL;
+        if (tipoOpt == 2) tipo = TipoEvento.TARJETA_AMARILLA;
+        if (tipoOpt == 3) tipo = TipoEvento.TARJETA_ROJA;
+        if (tipoOpt == 4) tipo = TipoEvento.DOBLE_AMARILLA;
+        if (tipoOpt == 5) tipo = TipoEvento.PENAL_COMETIDO;
+        if (tipoOpt == 6) tipo = TipoEvento.PENAL_CONVERTIDO;
+        if (tipoOpt == 7) tipo = TipoEvento.PENAL_ERRADO;
+        if (tipoOpt == 8) tipo = TipoEvento.SUSTITUCION;
+        if (tipoOpt == 9) tipo = TipoEvento.LESION;
+
+        System.out.print("Minuto: ");
+        int min = Integer.parseInt(sc.nextLine());
+
+        System.out.println("Jugadores convocados:");
+        ArrayList<Jugador> jugadoresPartido = new ArrayList<>();
+        int index = 1;
+        for (Participacion part : pActual.getParticipaciones()) {
+            for (Jugador j : part.getSeleccion().getJugadores()) {
+                jugadoresPartido.add(j);
+                System.out.println(index + ". " + j.getNombre() + " (" + part.getSeleccion().getNombreFederacion() + ")");
+                index++;
+            }
+        }
+
+        System.out.print("Seleccione el número de jugador: ");
+        int jugSel = Integer.parseInt(sc.nextLine());
+
+        if (jugSel >= 0 && jugSel < jugadoresPartido.size()) {
+            gestion.registrarEvento(pActual, tipo, min, jugadoresPartido.get(jugSel));
+        } else {
+            System.out.println("Selección inválida.");
         }
     }
 
@@ -399,7 +476,7 @@ public class Main {
             System.out.println((i + 1) + ". " + gestion.getSelecciones().get(i).getNombreFederacion());
         }
         System.out.print("Elija el número de la selección: ");
-        int opcion = sc.nextInt() - 1;
+        int opcion = Integer.parseInt(sc.nextLine()) - 1;
         if (opcion >= 0 && opcion < gestion.getSelecciones().size()) {
             return gestion.getSelecciones().get(opcion);
         }
