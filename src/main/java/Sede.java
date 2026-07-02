@@ -1,5 +1,7 @@
 import java.util.ArrayList;
-
+/**
+ * Crea las sedes de los partidos del mundial
+ */
 public class Sede {
     public Pais pais;
     private String ciudad;

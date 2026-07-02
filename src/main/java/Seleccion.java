@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Crea las selecciones participantes de la copa del mundo
+ */
 public class Seleccion {
     private String nombreFederacion;
     private String camisetaPrincipal;

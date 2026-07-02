@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Crea los Estadios de las Sedes del mundial
+ */
 public class Estadio {
     private String nombre;
     private int capacidad;

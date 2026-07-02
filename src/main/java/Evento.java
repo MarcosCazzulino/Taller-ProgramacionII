@@ -1,3 +1,6 @@
+/**
+ * Crea los eventos que ocurren en los partidos
+ */
 public class Evento {
     private TipoEvento tipo;
     private int minuto;

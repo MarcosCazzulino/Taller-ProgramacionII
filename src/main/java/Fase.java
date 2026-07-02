@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Crea las distintas fases que conforman a la Copa del Mundo
+ */
 public class Fase {
     private NombreFase nombre;
     private List<Partido> partidos;
@@ -35,6 +37,7 @@ public class Fase {
     //Metodo para en clase gestora hacer una restriccion a la hora de agregar partidos a una fase.
     public int cantidadMaximaPartidos() {
         switch (nombre) {
+            case GRUPOS: return 72;
             case DIECISEISAVOS: return 16;
             case OCTAVOS: return 8;
             case CUARTOS: return 4;

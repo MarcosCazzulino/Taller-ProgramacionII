@@ -1,3 +1,6 @@
+/**
+ * Clase asociación entre Árbitro y Partido. Establece el arbitraje para un partido.
+ */
 public class Arbitraje {
     private CategoriaArbitro rol;
     private Partido partido;

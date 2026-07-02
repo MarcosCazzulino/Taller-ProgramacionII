@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Crea países que sirven para la nacionalidad de los árbitros, sedes o selecciones
+ */
 public class Pais {
     private String nombre;
     private String bandera;

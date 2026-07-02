@@ -1,3 +1,6 @@
+/**
+ * Clase asociación entre Seleccion y Partido, buscando registrar la participación de una Seleccion en un partido y ciertos eventos
+ */
 public class Participacion {
     private boolean esLocal;
     private Partido partido;

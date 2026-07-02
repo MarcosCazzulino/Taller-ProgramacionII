@@ -1,11 +1,12 @@
 import javax.swing.*;
-import javax.xml.transform.Source;
 import java.sql.Time;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Donde se ejecuta el programa, con datos hardcodeados para pruebas
+ */
 public class Main {
     public static void main(String[] args) {
         GestionMundial gestion = new GestionMundial();
@@ -86,6 +87,38 @@ public class Main {
         gestion.agregarDTASeleccion(sParaguay, alfaro);
 
         grupoA.agregarSeleccion(sParaguay);
+
+        Partido partido = new Partido(new Date(), Time.valueOf("20:00:00"), 90, 4, faseGrupos, mercedes);
+
+        Participacion partPar = new Participacion(true, partido, sParaguay);
+        Participacion partUSA = new Participacion(false, partido, sUSA);
+        partido.agregarParticipacion(partPar);
+        partido.agregarParticipacion(partUSA);
+
+        sParaguay.agregarParticipacion(partPar);
+        sUSA.agregarParticipacion(partUSA);
+
+        Pais paisArbitro = new Pais("Brasil", "Verde y Amarillo");
+        partido.agregarArbitraje(new Arbitraje(CategoriaArbitro.PRINCIPAL, partido, new Arbitro("Wilton Sampaio", 1981, 12, paisArbitro)));
+        partido.agregarArbitraje(new Arbitraje(CategoriaArbitro.ASISTENTE1, partido, new Arbitro("Arb Asist 1", 1985, 8, paisArbitro)));
+        partido.agregarArbitraje(new Arbitraje(CategoriaArbitro.ASISTENTE2, partido, new Arbitro("Arb Asist 2", 1987, 7, paisArbitro)));
+        partido.agregarArbitraje(new Arbitraje(CategoriaArbitro.CUARTOARBITRO, partido, new Arbitro("Arb Cuarto", 1989, 5, paisArbitro)));
+        partido.agregarArbitraje(new Arbitraje(CategoriaArbitro.VARPRINCIPAL, partido, new Arbitro("Arb VAR 1", 1980, 10, paisArbitro)));
+        partido.agregarArbitraje(new Arbitraje(CategoriaArbitro.VARASISTENTE, partido, new Arbitro("Arb VAR 2", 1984, 6, paisArbitro)));
+
+        try {
+            gestion.planificarPartido(faseGrupos, partido);
+            System.out.println("Partido planificado con éxito en Atlanta.");
+        } catch (IllegalStateException e) {
+            System.out.println("No se pudo planificar el partido: " + e.getMessage());
+        }
+
+        System.out.println("---------- Eventos en el Partido ----------");
+        gestion.registrarEvento(partido, TipoEvento.TARJETA_AMARILLA, 15, pulisic);
+        gestion.registrarEvento(partido, TipoEvento.GOL, 28, almiron);
+        gestion.registrarEvento(partido, TipoEvento.TARJETA_AMARILLA, 42, almiron);
+        gestion.registrarEvento(partido, TipoEvento.GOL, 60, pulisic);
+        gestion.registrarEvento(partido, TipoEvento.TARJETA_ROJA, 73, almiron);
 
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
@@ -193,7 +226,7 @@ public class Main {
                         }
 
                         System.out.println("Seleccione el partido que quiere ver: ");
-                        int numeroPartido = Integer.parseInt(sc.nextLine());
+                        int numeroPartido = Integer.parseInt(sc.nextLine()) - 1;
                         if (numeroPartido >= 0 && numeroPartido < gestion.getPartidos().size()) {
                             gestion.getPartidos().get(numeroPartido).fichaTecnica();
                         } else {

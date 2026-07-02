@@ -1,6 +1,9 @@
+
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Clase para crear árbitros y añadirlos a un arbitraje
+ */
 public class Arbitro extends Persona {
     private int aniosExperiencia;
     private Pais pais;

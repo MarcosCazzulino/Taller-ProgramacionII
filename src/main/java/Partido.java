@@ -2,7 +2,9 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * Crea los partidos que se disputan en la Copa del Mundo
+ */
 public class Partido {
     private Date fecha;
     private Time horario;

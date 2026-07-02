@@ -2,7 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 import java.util.Comparator;
-
+/**
+ * Crea los grupos de la fase de grupos del mundial
+ */
 public class Grupo {
     private String identificacion;
     private String descripcion;
@@ -35,7 +37,7 @@ public class Grupo {
             Partido partido = partSelActual.getPartido();
 
             // Se valida que el partido pertenezca a esta fase
-            if (partido.getFase().getNombre() == this.fase.getNombre()) {
+            if (partido.getFase().getNombre().equals(this.fase.getNombre())) {
                 Participacion participacionRival = null;
                 for (Participacion pRival : partido.getParticipaciones()) {
                     // Se valida que no sea la misma selección

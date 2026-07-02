@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Crea a los jugadores de las selecciones participantes del mundial
+ */
 public class Jugador extends Persona {
     private int dorsal;
     private Posicion posicion;

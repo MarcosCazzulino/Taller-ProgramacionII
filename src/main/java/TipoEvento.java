@@ -1,3 +1,6 @@
+/**
+ * Contiene los distintos eventos que pueden ocurrir en un partido
+ */
 public enum TipoEvento {
     GOL,
     TARJETA_AMARILLA,

@@ -1,5 +1,7 @@
 import java.util.*;
-
+/**
+ * Clase gestora encargada de coordinar los requerimientos del programa
+ */
 public class GestionMundial {
     private List<Fase> fases;
     private List<Grupo> grupos;

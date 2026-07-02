@@ -1,3 +1,6 @@
+/**
+ * Crea los integrantes del cuerpo técnico de una selección
+ */
 public class CuerpoTecnico extends Persona {
     private Rol rol;
 

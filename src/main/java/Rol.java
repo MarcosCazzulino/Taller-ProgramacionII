@@ -1,3 +1,6 @@
+/**
+ * Roles que puede tener un integrante del CuerpoTecnico
+ */
 public enum Rol {
     AYUDANTECAMPO,
     PREPARADORFISICO,

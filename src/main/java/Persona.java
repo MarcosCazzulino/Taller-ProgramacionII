@@ -1,3 +1,6 @@
+/**
+ * Clase abstracta que sirve de base para Jugador, Arbitro, DirectorTecnico y CuerpoTecnico
+ */
 public abstract class Persona {
     private String nombre;
     private int fecNacimiento;

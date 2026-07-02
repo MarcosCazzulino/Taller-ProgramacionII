@@ -1,3 +1,6 @@
+/**
+ * Crea al director técnico de una selección
+ */
 public class DirectorTecnico extends Persona {
     private int fechaNombramiento;
 

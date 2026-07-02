@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Establece la estructura principal del mundial
+ */
 public class Mundial {
     private int anio;
     private String mascota;
